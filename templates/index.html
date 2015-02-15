@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>URL Shortener </title>
+<link rel="stylesheet" type="text/css" href="css/urlshortner.css">
+</head>
+<body>
+      <!-- panel with buttons -->
+        <div class="main">
+            <div class="panel">
+		{% if user is not null %}
+                	<span id="user"> {{user}} </span>
+			<a href="http://europa:8080/logout.php" id="logout">Logga ut</a>
+		{% else %}
+			<a href="#login_form" id="login_pop">Log In</a>
+			<a href="#join_form" id="join_pop">Sign Up</a>
+		{% endif %}
+            
+	    </div>
+	    <div class='content'>
+            <h1>URL Shortener </h1>
+		{% if user is not null %}
+        	Welcome {{user}} <br />
+        	{% if user == "admin" %}
+                	<a href="http://europa:8080/admin.php" alt="adminpage">Adminpage</a>
+        	{% else %}
+                	<a href="http://europa:8080/user.php" alt="Userpage">My page</a>
+        	{%endif %}
+
+        		<a href="http://europa:8080/logout.php" alt="logout">Logout</a>
+		{% else  %}
+        		<!-- <form action="login.php" method="post"> -->
+        		<!-- Username: <input type="text" name="user_name"> Password: <input type="password" name="password"> -->
+        		<!-- <input type="submit" value="Logga in"> -->
+        		<!-- </form> -->
+		{% endif %}
+		<form action="post.php" method="post">
+		Url: <input type="text" name="url">
+		<input type="hidden" name="user" value="{{user}}">
+		<input type="submit" value="Skapa URL">
+		</form>
+		<br/>
+       			You created url: <a href='{{ link }}'>{{link}}</a>
+		<br/>
+	    </div>
+	</div>
+	<a href="#x" class="overlay" id="login_form"></a>
+        <div class="popup">
+	    <form action="login.php" method="post">
+            	<h2>Welcome Guest!</h2>
+            	<p>Please enter your login and password here</p>
+            	<div>
+                	<label for="login">Login</label>
+			<input type="text" name="user_name">
+            	</div>
+            	<div>
+                	<label for="password">Password</label>
+			<input type="password" name="password">
+           	 </div>
+            	<input type="button" value="Log In" />
+		<input type="submit" value="Logga in">
+	    </form>
+            <a class="close" href="#close"></a>
+        </div>
+
+        <!-- popup form #2 -->
+        <a href="#x" class="overlay" id="join_form"></a>
+        <div class="popup">
+	<form action="users.php" method="post">
+            <h2>Sign Up</h2>
+            <p>Please enter your details here</p>
+            <div>
+                <label for="username">Login (username)</label>
+                <input type="text" id="username" name="user_name" value="" />
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="pass" name="password" value="" />
+            </div>
+            <input type="submit" value="Sign Up" />&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a href="#login_form" id="login_pop">Log In</a>
+
+            <a class="close" href="#close"></a>
+        </form>
+	</div>
+</div>
+</body>
+</head>
+</html>

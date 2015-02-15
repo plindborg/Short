@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Admin</title>
+</head>
+<body>
+{{test}}
+{% if user is defined %}
+	Welcome {{user}} <br />
+{% endif %}
+
+<ul>
+    {% for row in rows %}
+       <li> <a href='{{ row.code }}'>{{row.code}}</a> {{row.url}}  </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

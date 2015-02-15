@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>URL Shortener </title>
+</head>
+<body>
+<h1>URL Shortener </h1>
+<a href="http://europa:8080/admin.php" alt="adminpage">Adminpage</a>
+<form action="login.php" method="post">
+Username: <input type="text" name="user_name"> Password: <input type="text" name="password">
+<input type="submit">
+</form>
+<form action="post.php" method="post">
+Url: <input type="text" name="url"><br>
+<input type="submit">
+</form>	
+	
+</body>
+</head>
+</html>
