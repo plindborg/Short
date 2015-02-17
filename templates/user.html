@@ -1,17 +1,54 @@
-<html>
-<head>
-<title>Admin</title>
-</head>
-<body>
-{{test}}
-{% if user is defined %}
-        Welcome {{user}} <br />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Url shortner</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">	
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<ul class="nav nav-pills">
+<li role="presentation"><a href="index.php">Home</a></li>
+{% if user is not null %}
+    <li role="presentation" class="active"><a href="user.php">{{user}}</a></li>
+    <li role="presentation"><a href="logout.php">Logout</a></li>
+{% else  %}
+   <!-- <li role="presentation"><a href="#">Profile</a></li> -->
+   <li role="presentation"><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"   >Login</a></li>
 {% endif %}
 
-<ul>
-    {% for row in rows %}
-       <li> <a href='{{ row.code }}'>{{row.code}}</a> {{row.url}}  </li>
-    {% endfor %}
-</ul>           
-</body> 
+</ul>	
+
+<div class="container main">
+	<div class="panel panel-default">
+  		<div class="panel-heading">
+    			<h3 class="panel-title">Created urls</h3>
+  		</div>
+      {% if user is defined %}
+         <h3> Welcome {{user}}</h3> <br />
+      {% endif %}
+
+      <ul>
+        {% for row in rows %}
+           <li> <a href='{{ row.code }}'>{{row.code}}</a> {{row.url}}  </li>
+        {% endfor %}
+      </ul>
+  </div>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
