@@ -18,6 +18,7 @@
     <![endif]-->
   </head>
   <body>
+<div class="container main">
 <ul class="nav nav-pills">
 <li role="presentation"><a href="index.php">Home</a></li>
 {% if user is not null %}
@@ -30,16 +31,12 @@
 
 </ul>	
 
-<div class="container main">
 	<div class="panel panel-default">
   		<div class="panel-heading">
-    			<h3 class="panel-title">Created urls</h3>
+    			<h3 class="panel-title">Welcome {{user}}</h3>
   		</div>
-      {% if user is defined %}
-         <h3> Welcome {{user}}</h3> <br />
-      {% endif %}
-
-      <ul>
+         <h3 class="userlabel"><small>Created urls</small></h3>
+      <ul class="urllist">
         {% for row in rows %}
            <li> <a href='{{ row.code }}'>{{row.code}}</a> {{row.url}}  </li>
         {% endfor %}

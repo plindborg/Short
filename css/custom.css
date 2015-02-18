@@ -5,3 +5,13 @@
 .nav {
 margin-bottom: 10px;
 }
+
+h3.userlabel {
+  margin-left: 4%;
+}
+
+ul.urllist {
+  list-style-type: none;
+  padding:0 4%; 
+  margin: 0 0 10px;
+}
