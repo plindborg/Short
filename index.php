@@ -36,8 +36,10 @@ if ($result->num_rows > 0) {
 else {
 	$rows = array();
 	$result = $db->getLatestUrl();
-	$latestrow = $result->fetch_assoc();
-	header('Content-Type: text/html');
+  if($result != null) {
+	  $latestrow = $result->fetch_assoc();
+  }
+  header('Content-Type: text/html');
 	if($user === null){
 		//$user = "guest";
 		session_destroy();
