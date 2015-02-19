@@ -46,17 +46,36 @@ public function getAllUrls() {
 	}
 	return false;
 }
+
+public function findUrl($in) {
+    //var_dump($in);
+    $sql   = "SELECT code,url,user FROM urls WHERE code = ?";
+    //var_dump($sql);
+    //echo '--';
+    $stmt  = $this->conn->prepare($sql);
+    //var_dump($stmt);
+    $stmt->bind_param('s', $in);
+    $stmt->execute();
+    $stmt->bind_result($code ,$url, $user);
+    $rows  = array();
+    while($stmt->fetch()) {
+        $rows = array(  "code" => $code, "url" => $url, "user" => $user);
+    }
+    //var_dump($rows);
+    return $rows;
+}
+
 public function getUserUrls($username) {
-        $sql = "SELECT code,url,user FROM urls WHERE user = ?";
-         $stmt  = $this->conn->prepare($sql);
+    $sql = "SELECT code,url,user FROM urls WHERE user = ?";
+    $stmt  = $this->conn->prepare($sql);
 	$stmt->bind_param('s', $username);
-        $stmt->execute();
-        $stmt->bind_result($code ,$url, $user);
-        $rows = array();
+    $stmt->execute();
+    $stmt->bind_result($code ,$url, $user);
+    $row = false;
 	while($stmt->fetch()) {
-		$rows[]= array(  "code" => $code, "url" => $url, "user" => $user);
+		$row = array(  "code" => $code, "url" => $url, "user" => $user);
 	}
-	return $rows;
+	return $row;
 }
 
 public function connect() {

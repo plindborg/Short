@@ -15,5 +15,10 @@ if(!isset($_SESSION['login_user'])) {
         
 $db = new DB();
 $db->connect();
-$rows = $db->getUserUrls($user);
+if($user == 'admin') {
+	$rows = $db->getAllUrls();
+}
+else {
+	$rows = $db->getUserUrls($user);
+}
 echo $twig->render('user.html', array( 'rows' => $rows, 'user' => $user ));

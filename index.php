@@ -25,23 +25,21 @@ $conn = $db->connect();
 
 $in = str_replace('/','',$_SERVER['REQUEST_URI']);
 
-$sql = "SELECT * FROM urls WHERE code = '" . $in ."'" ;
-$result = $conn->query($sql);
+$result = $db->findUrl($in);
 
-if ($result->num_rows > 0) {
-	$row = $result->fetch_assoc();
-	header("Location: " . $row['url']);	
+if ($result != false) {
+	//$row = $result->fetch_assoc();
+	header("Location: " . $result['url']);	
 	die();
 }
 else {
 	$rows = array();
 	$result = $db->getLatestUrl();
-  if($result != null) {
+  	if($result != null) {
 	  $latestrow = $result->fetch_assoc();
-  }
-  header('Content-Type: text/html');
+  	}
+  	//header('Content-Type: text/html');
 	if($user === null){
-		//$user = "guest";
 		session_destroy();
 	}
 	echo $twig->render('index.html', array('link' => $link,'user' => $user, 'latesturl' => $latestrow ));
