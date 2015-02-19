@@ -63,17 +63,20 @@
   </div>
 </div>
 <!-- <div class="container main"> -->
-	<div class="panel panel-default">
-  		<div class="panel-heading">
-    			<h3 class="panel-title">URL Shortner</h3>
-  		</div>
+<div class="panel panel-default">
+	 <div class="panel-heading">
+    		<h3 class="panel-title">URL Shortner</h3>
+  	</div>
   	<div class="panel-body">
-		<form action="post.php" method="post">
-                Url: <input type="text" name="url">
-                <input type="hidden" name="user" value="{{user}}">
-                <button type="submit" class="btn btn-primary">Skapa URL</button>
-                </form>
-  		</div>
+		  <form action="post.php" method="post">
+        Url: <input type="text" class="form-control" name="url">
+        {% if user is not null %}
+        Custom code:<input type="text" class="form-control" name="customcode">
+        {% endif%}
+        <input type="hidden" name="user" class="form-control" value="{{user}}">
+        <button type="submit" class="btn btn-primary url-btn">Skapa URL</button>
+      </form>
+	  </div>
 </div>
 {% if link is not null %}
   <div class="jumbotron">

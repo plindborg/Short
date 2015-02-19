@@ -10,12 +10,18 @@ if(!isset($_SESSION['login_user'])) {
 }
 $code = "";
 $url = $_POST['url'];
+$custom = $_POST['customcode'];
 if($url == "") {
-die();
+	die();
 }
-for($i = 0; $i < 5; $i++) {
-	$char = chr(rand(65,90));
-	$code = $code . $char;	
+if($custom === "") {
+	for($i = 0; $i < 5; $i++) {
+		$char = chr(rand(65,90));
+		$code = $code . $char;	
+	}
+}
+else {
+	$code = $custom;
 }
 
 $db = new DB();
