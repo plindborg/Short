@@ -27,7 +27,7 @@ $in = str_replace('/','',$_SERVER['REQUEST_URI']);
 
 $result = $db->findUrl($in);
 
-if ($result != false) {
+if ($result != false && $in != "") {
 	//$row = $result->fetch_assoc();
 	header("Location: " . $result['url']);	
 	die();

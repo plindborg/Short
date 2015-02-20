@@ -73,7 +73,7 @@ public function getUserUrls($username) {
     $stmt->bind_result($code ,$url, $user);
     $row = false;
 	while($stmt->fetch()) {
-		$row = array(  "code" => $code, "url" => $url, "user" => $user);
+		$row[] = array(  "code" => $code, "url" => $url, "user" => $user);
 	}
 	return $row;
 }

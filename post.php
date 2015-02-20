@@ -10,7 +10,13 @@ if(!isset($_SESSION['login_user'])) {
 }
 $code = "";
 $url = $_POST['url'];
-$custom = $_POST['customcode'];
+if(isset($_POST['customcode'])) {
+	$custom = $_POST['customcode'];	
+}
+else {
+	$custom="";
+}
+
 if($url == "") {
 	die();
 }
@@ -39,6 +45,3 @@ if($result) {
 else {
 	echo "Something went wrong" . "<br>";
 }
-
-//echo "Connected successfully";
-
