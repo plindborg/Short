@@ -26,42 +26,12 @@
     <li role="presentation"><a href="logout.php">Logout</a></li>
 {% else  %}
    <!-- <li role="presentation"><a href="#">Profile</a></li> -->
-   <li role="presentation"><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"   >Login</a></li>
+   <li role="presentation"><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Log in</a></li>
+   <li role="presentation"><a href="#" data-toggle="modal" data-target=".bs-example2-modal-sm">Sign in</a></li>
 {% endif %}
 
 </ul>	
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">	
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	
-	<form role="form" action="login.php" method="post" >
-  	<div class="form-group">
-    		<label for="email">User name:</label>
-    		<input type="text" class="form-control" id="email" name="user_name">
-  	</div>
-  	<div class="form-group">
-    		<label for="pwd">Password:</label>
-    		<input type="password" class="form-control" id="pwd" name="password">
-  	</div>
-  	<div class="checkbox">
-    		<label><input type="checkbox"> Remember me</label>
-  	</div>
-  	<div class="modal-footer">
-      <a href="#" data-dismiss="modal" class="btn">Close</a>
-      <button type="submit" class="btn btn-primary">Log-in</button>
-    </div>
-    <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-	</form>
-	
-	<!--<div class="modal-footer">
-          <a href="#" data-dismiss="modal" class="btn">Close</a>
-          <a href="#" class="btn btn-primary">Log-in</a>
-        </div> -->
-    </div>
-  </div>
-</div>
 <!-- <div class="container main"> -->
 <div class="panel panel-default">
 	 <div class="panel-heading">
@@ -69,14 +39,14 @@
   	</div>
   	<div class="panel-body">
 		  <form action="post.php" method="post">
-        Url: <input type="text" class="form-control" name="url">
+        Url: <input type="url" class="form-control span3" placeholder="Enter the url you want shorten"  name="url">
         {% if user is not null %}
-        Custom code:<input type="text" class="form-control" name="customcode">
+        Custom code:<input type="text" class="form-control span3" name="customcode">
         {% endif%}
-        <input type="hidden" name="user" class="form-control" value="{{user}}">
+        <input type="hidden" name="user" class="form-control span3" value="{{user}}">
         <button type="submit" class="btn btn-primary url-btn">Skapa URL</button>
       </form>
-	  </div>
+	 </div>
 </div>
 {% if link is not null %}
   <div class="jumbotron">
@@ -85,9 +55,70 @@
   </div>
 {%endif %}
 </div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content"> 
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         <h4 class="modal-title" id="myModalLabel">Login to Url Shortner</h4>
+      </div>
+      <form role="form" action="./" method="post" >
+        <div class="modal-body">
+        <div class="err" id="add_err"></div>
+          <div class="form-group">
+              <label for="email">User name:</label>
+              <input type="text" class="form-control" id="user_name" name="user_name">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+          <button type="submit" class="btn btn-primary" id="login">Log-in</button>
+        </div>
+      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example2-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content"> 
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         <h4 class="modal-title" id="myModalLabel">Sign up for Url Shortner</h4>
+      </div>
+      <form role="form" action="#" method="post" >
+        <div class="modal-body">
+          <div class="err" id="signup_err"></div>
+          <div class="form-group">
+              <label for="email">Login (User name):</label>
+              <input type="text" class="form-control" id="signup_user_name" name="user_name">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" id="signup_password" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+          <button type="submit" class="btn btn-primary" id="signup">Sign up</button>
+        </div>
+      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+      </form>
+    </div>
+  </div>
+</div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/myJs.js"></script>
   </body>
 </html>

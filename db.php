@@ -17,7 +17,7 @@ public function insertUser($user_name, $password) {
         {
                 $stmt->bind_param('ss', $user_name, $password);
                 if ($stmt->execute() === TRUE) {
-                        echo "New record created nuccessfully" . "<br>" ;
+                        //echo "New record created nuccessfully" . "<br>" ;
                         return true;
                 } else {
                         //echo "Error: " . $sql . "<br>" . $conn->error;
@@ -25,7 +25,7 @@ public function insertUser($user_name, $password) {
                 }
         }
         else {
-                return "error";
+                return false;
         }
 }
 
@@ -49,17 +49,17 @@ public function getAllUrls() {
 
 public function findUrl($in) {
     //var_dump($in);
-    $sql   = "SELECT code,url,user FROM urls WHERE code = ?";
+    $sql   = "SELECT code,url,user,accessed FROM urls WHERE code = ?";
     //var_dump($sql);
     //echo '--';
     $stmt  = $this->conn->prepare($sql);
     //var_dump($stmt);
     $stmt->bind_param('s', $in);
     $stmt->execute();
-    $stmt->bind_result($code ,$url, $user);
+    $stmt->bind_result($code ,$url, $user,$accessed);
     $rows  = array();
     while($stmt->fetch()) {
-        $rows = array(  "code" => $code, "url" => $url, "user" => $user);
+        $rows = array(  "code" => $code, "url" => $url, "user" => $user, "accessed" => $accessed);
     }
     //var_dump($rows);
     return $rows;
@@ -109,41 +109,29 @@ public function insert($code,$url, $user) {
 	}
 }
 
-/*public function insertuser($username,$password) {
-        $sql = "INSERT INTO users (user_name, password) VALUES ('" . $username . "','" . $password . "')";
-
-        if ($this->conn->query($sql) === TRUE) {
-                //echo "New record created successfully" . "<br>" ;
-                return true;
-        } else {
-                //echo "Error: " . $sql . "<br>" . $conn->error;
-                return false;
-        }
-}*/
-
 public function login($username, $password) {
+    if ($password == "" || $username == "") {
+        return false;
+    }
 
-        $sql   = "SELECT user_name, password FROM users where user_name = ?";
+    $sql   = "SELECT user_name, password FROM users where user_name = ?";
 	$stmt  = $this->conn->prepare($sql);
 	$stmt->bind_param('s', $username);
 	$stmt->execute();
-	$stmt->bind_result($user,$passwd);
+	$stmt->bind_result($$user,$passwd);
 	$stmt->fetch();
 	
 	if($passwd == $password) {
 		return true; 
 	}
 	return false; 
-	/* 
-        $result = $this->conn->query($sql);
-        if($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-		if($row[password] == $password )
-			return true;
-		return $false;
-        }
-        return false;
-	*/
+}
+
+public function updateUrlCounter($code, $counter) {
+    $sql = "UPDATE urls SET accessed = ? WHERE code = ?";
+    $stmt  = $this->conn->prepare($sql);
+    $stmt->bind_param('is', $counter, $code);
+    $stmt->execute();
 }
 
 }

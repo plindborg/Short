@@ -11,7 +11,7 @@ if(!isset($_SESSION['login_user'])) {
 $code = "";
 $url = $_POST['url'];
 if(isset($_POST['customcode'])) {
-	$custom = $_POST['customcode'];	
+	$custom = trim($_POST['customcode']);	
 }
 else {
 	$custom="";

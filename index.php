@@ -29,6 +29,17 @@ $result = $db->findUrl($in);
 
 if ($result != false && $in != "") {
 	//$row = $result->fetch_assoc();
+
+	$counter = $result['accessed'];
+
+	if(is_null($counter)) {
+		$counter = 1;
+	}
+	else {
+		$counter = $counter + 1;
+	}
+	$db->updateUrlCounter($result['code'], $counter);
+
 	header("Location: " . $result['url']);	
 	die();
 }
