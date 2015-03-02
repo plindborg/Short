@@ -40,11 +40,15 @@ public function getLatestUrl() {
 
 public function getAllUrls() {
 	$sql = "SELECT * FROM urls";
-	$result = $this->conn->query($sql);
-	if($result->num_rows > 0) {
-		return $result;
-	}
-	return false;
+    $stmt  = $this->conn->prepare($sql);
+    //$stmt->bind_param('s', $username);
+    $stmt->execute();
+    $stmt->bind_result($code ,$url, $user);
+    $row = false;
+    while($stmt->fetch()) {
+        $row[] = array(  "code" => $code, "url" => $url, "user" => $user);
+    }
+    return $row;
 }
 
 public function findUrl($in) {
