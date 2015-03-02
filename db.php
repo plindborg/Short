@@ -39,14 +39,14 @@ public function getLatestUrl() {
 }
 
 public function getAllUrls() {
-	$sql = "SELECT * FROM urls";
+	$sql = "SELECT code, url, user, accessed FROM urls";
     $stmt  = $this->conn->prepare($sql);
     //$stmt->bind_param('s', $username);
     $stmt->execute();
-    $stmt->bind_result($code ,$url, $user);
+    $stmt->bind_result($code ,$url, $user, $accessed);
     $row = false;
     while($stmt->fetch()) {
-        $row[] = array(  "code" => $code, "url" => $url, "user" => $user);
+        $row[] = array(  "code" => $code, "url" => $url, "user" => $user, "accessed" => $accessed);
     }
     return $row;
 }
