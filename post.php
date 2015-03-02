@@ -1,6 +1,14 @@
 <?php
 include("db.php");
 require_once 'vendor/autoload.php';
+
+// Length of the shorten code
+$codelength = 5;
+//Deinfes the characters that is used for the randomized code. 
+// 65 = A and 90 = Z.
+$ascii_no_start = 65;
+$ascii_no_stop = 90;
+
 $loader = new Twig_Loader_Filesystem('templates');
 $twig = new Twig_Environment($loader);
 session_start();
@@ -21,8 +29,8 @@ if($url == "") {
 	die();
 }
 if($custom === "") {
-	for($i = 0; $i < 5; $i++) {
-		$char = chr(rand(65,90));
+	for($i = 0; $i < $codelength; $i++) {
+		$char = chr(rand($ascii_no_start,$ascii_no_stop));
 		$code = $code . $char;	
 	}
 }
