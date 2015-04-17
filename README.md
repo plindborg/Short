@@ -1,2 +1,2 @@
 #Short
-## A simple URL-shortner
+A simple URL-shortner
