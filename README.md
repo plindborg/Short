@@ -1,2 +1,3 @@
 #Short
-A simple URL-shortner
+A simple URL-
+Easy to use..
